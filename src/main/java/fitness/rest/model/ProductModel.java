@@ -9,7 +9,7 @@ import org.springframework.hateoas.ResourceSupport;
 public class ProductModel extends ResourceSupport {
     private Long productId;
     private String name;
-    private MeasureModel measure;
+    private String measure;
     private NutritionFactsModel nutritionFacts;
 
 
@@ -29,19 +29,19 @@ public class ProductModel extends ResourceSupport {
         this.name = name;
     }
 
-    public MeasureModel getMeasure() {
-        return measure;
-    }
-
-    public void setMeasure(MeasureModel measure) {
-        this.measure = measure;
-    }
-
     public NutritionFactsModel getNutritionFacts() {
         return nutritionFacts;
     }
 
     public void setNutritionFacts(NutritionFactsModel nutritionFacts) {
         this.nutritionFacts = nutritionFacts;
+    }
+
+    public String getMeasure() {
+        return measure;
+    }
+
+    public void setMeasure(String measure) {
+        this.measure = measure;
     }
 }

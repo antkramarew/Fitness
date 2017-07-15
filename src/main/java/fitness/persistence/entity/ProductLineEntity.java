@@ -1,4 +1,4 @@
-package fitness.persistance.entity;
+package fitness.persistence.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

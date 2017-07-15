@@ -1,6 +1,8 @@
-package fitness.persistance.entity;
+package fitness.persistence.entity;
 
 import com.google.common.base.Objects;
+import fitness.domain.dto.types.Measure;
+import fitness.domain.dto.types.NutritionFacts;
 
 import javax.persistence.*;
 
@@ -14,7 +16,6 @@ public class ProductEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    @Embedded
     private Measure measure;
     @Embedded
     private NutritionFacts nutritionFacts;

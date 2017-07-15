@@ -1,16 +1,10 @@
 package fitness.rest.controller;
 
-import fitness.domain.dto.ProductDTO;
 import fitness.domain.dto.ProductLineDTO;
 import fitness.rest.model.ProductLineModel;
-import fitness.rest.model.ProductModel;
-import fitness.service.ProductService;
+import fitness.service.business.ProductService;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.query.Param;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +34,7 @@ public class ProductLineController {
         ProductLineDTO productLineDTO = this.productService.getProductLine(productLineId);
         ProductLineModel model = mapper.map(productLineDTO, ProductLineModel.class);
         model.add(linkTo(methodOn(ProductLineController.class).getProductLine(productLineId)).withSelfRel());
-        return new ResponseEntity(model, HttpStatus.OK);
+        return new ResponseEntity<>(model, HttpStatus.OK);
     }
 
 }

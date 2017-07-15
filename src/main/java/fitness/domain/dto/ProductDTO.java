@@ -1,6 +1,18 @@
 package fitness.domain.dto;
 
 import com.google.common.base.Objects;
+import fitness.domain.dto.types.Measure;
+import fitness.domain.dto.types.NutritionFacts;
+import fitness.service.utils.ErrorCode;
+import fitness.service.utils.ValidationConstants;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.hql.internal.ast.ErrorCounter;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by Anton_Kramarev on 6/16/2017.
@@ -8,8 +20,14 @@ import com.google.common.base.Objects;
 
 public class ProductDTO {
     private Long id;
+
+    @NotEmpty
+    @Size(max = 256, message = ValidationConstants.PRODUCT_NAME_TOO_LONG)
     private String name;
+    @NotNull
     private Measure measure;
+    @NotNull(message = ValidationConstants.NUTRITION_FACTS_REQUIRED)
+    @Valid
     private NutritionFacts nutritionFacts;
 
     public String getName() {

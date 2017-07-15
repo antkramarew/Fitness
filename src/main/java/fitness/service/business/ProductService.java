@@ -1,4 +1,4 @@
-package fitness.service;
+package fitness.service.business;
 
 import fitness.domain.dto.ProductDTO;
 import fitness.domain.dto.ProductLineDTO;

@@ -1,5 +1,6 @@
 package fitness.rest.model;
 
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
 
 /**
@@ -7,7 +8,7 @@ import org.springframework.hateoas.ResourceSupport;
  */
 public class ProductLineModel extends ResourceSupport {
     private Long id;
-    private ProductModel product;
     private Integer value;
-    private NutritionFactsModel totalNutritionFacts;
+    private String productName;
+    private NutritionFactsModel totals;
 }

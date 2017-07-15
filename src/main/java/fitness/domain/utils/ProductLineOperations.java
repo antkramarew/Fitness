@@ -11,7 +11,7 @@ public enum ProductLineOperations implements ProductLineOperation {
     COUNT_TOTAL_NUTRITION_FACTS {
         @Override
         public ProductLineDTO apply(ProductLineDTO productLineDTO) {
-            return ProductHelper.recalculateTotalNutritionFacts(productLineDTO);
+            return ProductHelper.updateTotals(productLineDTO);
         }
     };
 }

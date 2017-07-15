@@ -1,33 +1,43 @@
 package fitness.service.exeption;
 
-import fitness.service.utils.ErrorCodes;
+import fitness.service.utils.ErrorCode;
+
+import java.util.Objects;
 
 /**
  * Created by Anton_Kramarev on 6/22/2017.
  */
 public class ApiException extends RuntimeException {
 
-    private ErrorCodes errorCodes;
-    private String[] params;
+    private ErrorCode errorCode;
+    private Object[] params;
 
-    public ApiException(ErrorCodes errorCodes, String ... params) {
-        this.errorCodes = errorCodes;
+    public ApiException(ErrorCode errorCode, Object ... params) {
+        this.errorCode = errorCode;
         this.params = params;
     }
 
-    public ErrorCodes getErrorCodes() {
-        return errorCodes;
+    public ErrorCode getErrorCode() {
+        return errorCode;
     }
 
-    public void setErrorCodes(ErrorCodes errorCodes) {
-        this.errorCodes = errorCodes;
+    public String errorCodeToString() {
+        return errorCode.toString();
     }
 
-    public String[] getParams() {
+    public void setErrorCode(ErrorCode errorCode) {
+        this.errorCode = errorCode;
+    }
+
+    public Object[] getParams() {
         return params;
     }
 
     public void setParams(String[] params) {
         this.params = params;
+    }
+
+    public String getMessage() {
+        return String.format(errorCode.getMessage(), params);
     }
 }

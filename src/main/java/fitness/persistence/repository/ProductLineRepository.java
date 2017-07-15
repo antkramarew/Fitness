@@ -1,6 +1,6 @@
-package fitness.persistance.repository;
+package fitness.persistence.repository;
 
-import fitness.persistance.entity.ProductLineEntity;
+import fitness.persistence.entity.ProductLineEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

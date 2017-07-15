@@ -1,21 +1,18 @@
-package fitness.service;
+package fitness.service.business;
 
 import fitness.domain.dto.ProductDTO;
 import fitness.domain.dto.ProductLineDTO;
 import fitness.domain.utils.ProductLineOperations;
-import fitness.persistance.repository.ProductLineRepository;
-import fitness.service.exeption.ProductLineNotFoundException;
-import fitness.service.exeption.ProductNotFoundException;
+import fitness.persistence.entity.ProductEntity;
+import fitness.persistence.repository.ProductLineRepository;
+import fitness.persistence.repository.ProductRepository;
+import fitness.service.exeption.ResourceNotFoundException;
+import fitness.service.validator.ValidationManager;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import fitness.persistance.entity.ProductEntity;
-import fitness.persistance.repository.ProductRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
-import java.util.Optional;
 
 /**
  * Created by Anton_Kramarev on 6/18/2017.
@@ -28,6 +25,8 @@ public class ProductBusinessService implements ProductService {
     private ProductRepository productRepository;
     @Autowired
     private ProductLineRepository productLineRepository;
+    @Autowired
+    private ValidationManager validationManager;
 
     @Autowired
     private DozerBeanMapper mapper;
@@ -35,6 +34,7 @@ public class ProductBusinessService implements ProductService {
 
     @Override
     public ProductDTO createProduct(ProductDTO productDTO) {
+        validationManager.validateAndThrow(productDTO);
         ProductEntity productEntity = mapper.map(productDTO, ProductEntity.class);
         ProductEntity savedEntity = productRepository.save(productEntity);
         return mapper.map(savedEntity, ProductDTO.class);
@@ -44,18 +44,12 @@ public class ProductBusinessService implements ProductService {
     public ProductDTO getProduct(Long productId) {
         return this.productRepository.findProductById(productId)
                 .map(productEntity -> mapper.map(productEntity, ProductDTO.class))
-                .orElseThrow(() -> new ProductNotFoundException(productId));
+                .orElseThrow(() -> new ResourceNotFoundException(productId));
     }
 
     @Override
-    @Transactional
     public void deleteProduct(Long productId) {
-        Optional<ProductEntity> productToRemove = this.productRepository.findProductById(productId);
-        if (productToRemove.isPresent()) {
             this.productRepository.delete(productId);
-        } else {
-            throw new ProductNotFoundException(productId);
-        }
     }
 
     @Override
@@ -70,6 +64,6 @@ public class ProductBusinessService implements ProductService {
          return this.productLineRepository.findProductLineById(id)
                  .map(productLineEntity -> mapper.map(productLineEntity, ProductLineDTO.class))
                  .map(productLineDTO -> productLineDTO.apply(ProductLineOperations.COUNT_TOTAL_NUTRITION_FACTS))
-                 .orElseThrow(() -> new ProductLineNotFoundException(id));
+                 .orElseThrow(() -> new ResourceNotFoundException(id));
     }
 }

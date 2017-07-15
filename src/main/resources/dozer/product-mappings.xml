@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
-    <!--
+
     <configuration>
         <custom-converters>
-            <converter type="com.kingfisher.group.api.dozer.converter.StringToEnumConverter">
+            <converter type="fitness.dozer.StringEnumConverter">
                 <class-a>java.lang.Enum</class-a>
                 <class-b>java.lang.String</class-b>
             </converter>
         </custom-converters>
     </configuration>
--->
+
     <mapping map-id="productToModel">
         <class-a>fitness.domain.dto.ProductDTO</class-a>
         <class-b>fitness.rest.model.ProductModel</class-b>
@@ -18,5 +18,15 @@
             <a>id</a>
             <b>productId</b>
         </field>
+        <field custom-converter="fitness.dozer.NutritionFactsConverter">
+            <a>nutritionFacts</a>
+            <b>nutritionFacts</b>
+        </field>
     </mapping>
+
+    <mapping bean-factory="fitness.dozer.NutritionFactsBeanFactory">
+        <class-a>fitness.domain.dto.types.NutritionFacts</class-a>
+        <class-b>fitness.domain.dto.types.NutritionFacts</class-b>
+    </mapping>
+
 </mappings>

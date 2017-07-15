@@ -1,9 +1,9 @@
-package fitness.persistance.repository;
+package fitness.persistence.repository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import fitness.persistance.entity.ProductEntity;
+import fitness.persistence.entity.ProductEntity;
 
 import java.util.Optional;
 
