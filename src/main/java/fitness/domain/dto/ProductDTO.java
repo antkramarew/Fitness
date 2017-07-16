@@ -21,11 +21,12 @@ import javax.validation.constraints.Size;
 public class ProductDTO {
     private Long id;
 
-    @NotEmpty
+    @NotEmpty(message = ValidationConstants.PRODUCT_NAME_IS_EMPTY )
     @Size(max = 256, message = ValidationConstants.PRODUCT_NAME_TOO_LONG)
     private String name;
     @NotNull
     private Measure measure;
+
     @NotNull(message = ValidationConstants.NUTRITION_FACTS_REQUIRED)
     @Valid
     private NutritionFacts nutritionFacts;
