@@ -1,5 +1,9 @@
 package fitness.domain.dto.types;
 
+import java.util.Objects;
+
+import static java.util.Objects.requireNonNull;
+
 /**
  * Created by toxa on 7/13/2017.
  */
@@ -12,6 +16,7 @@ public class Fat {
     }
 
     public static Fat of(Integer value) {
+        requireNonNull(value);
         return new Fat(value);
     }
 
@@ -25,6 +30,7 @@ public class Fat {
     }
 
     public static Fat of(Fat fat) {
+        requireNonNull(fat);
         return of(fat.toInteger());
     }
 }

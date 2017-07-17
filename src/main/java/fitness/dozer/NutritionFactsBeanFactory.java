@@ -11,10 +11,10 @@ public class NutritionFactsBeanFactory implements BeanFactory{
     public Object createBean(Object obj, Class<?> aClass, String s) {
         final NutritionFacts source = (NutritionFacts) (obj);
         return new NutritionFacts(
-                Calories.of(source.getCalories()),
-                Fat.of(source.getFat()),
-                Carbohydrate.of(source.getCarbohydrate()),
-                Protein.of(source.getProtein())
+                source.getCalories() == null ? null : Calories.of(source.getCalories()),
+                source.getFat() == null ? null : Fat.of(source.getFat()),
+                source.getCarbohydrate() == null ? null : Carbohydrate.of(source.getCarbohydrate()),
+                source.getProtein() == null ? null : Protein.of(source.getProtein())
                 );
     }
 }
