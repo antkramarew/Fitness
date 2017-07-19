@@ -28,7 +28,6 @@ public class ProductDTO {
     private Measure measure;
 
     @NotNull(message = ValidationConstants.NUTRITION_FACTS_REQUIRED)
-    @Valid
     private NutritionFacts nutritionFacts;
 
     public String getName() {

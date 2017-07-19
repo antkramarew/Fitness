@@ -1,8 +1,6 @@
 package fitness.domain.dto.types;
 
-import java.util.Objects;
-
-import static java.util.Objects.requireNonNull;
+import static java.util.Optional.ofNullable;
 
 /**
  * Created by toxa on 7/13/2017.
@@ -16,12 +14,15 @@ public class Carbohydrate {
     }
 
     public static Carbohydrate of(Integer value) {
-        requireNonNull(value);
-        return new Carbohydrate(value);
+        return new Carbohydrate(ofNullable(value).orElse(0));
     }
 
     public Integer toInteger() {
         return value;
+    }
+
+    private static Carbohydrate zeroValue() {
+        return Carbohydrate.of(0);
     }
 
     @Override
@@ -30,7 +31,7 @@ public class Carbohydrate {
     }
 
     public static Carbohydrate of(Carbohydrate carbohydrate) {
-        requireNonNull(carbohydrate);
-        return of(carbohydrate.toInteger());
+        return of(ofNullable(carbohydrate).map(Carbohydrate::toInteger)
+                .orElse(0));
     }
 }

@@ -9,23 +9,27 @@ import javax.validation.constraints.NotNull;
 @Embeddable
 public class NutritionFacts {
 
-    @NotNull
     private Calories calories;
-    @NotNull
     private Fat fat;
-    @NotNull
     private Carbohydrate carbohydrate;
-    @NotNull
     private Protein protein;
 
     public NutritionFacts() {
     }
 
-    public NutritionFacts(Calories calories, Fat fat, Carbohydrate carbohydrate, Protein protein) {
+    private NutritionFacts(Calories calories, Fat fat, Carbohydrate carbohydrate, Protein protein) {
         this.calories = calories;
         this.fat = fat;
         this.carbohydrate = carbohydrate;
         this.protein = protein;
+    }
+
+    public static NutritionFacts of(Calories calories, Fat fat, Carbohydrate carbohydrate, Protein protein) {
+        return new NutritionFacts(calories, fat, carbohydrate, protein);
+    }
+
+    public static NutritionFacts of(NutritionFacts facts) {
+        return NutritionFacts.of(facts.getCalories(), facts.getFat(), facts.getCarbohydrate(), facts.getProtein());
     }
 
     public Calories getCalories() {

@@ -14,7 +14,7 @@ public class ProductLineEntity {
     private Long id;
 
     @OneToOne
-    private ProductEntity productEntity;
+    private ProductEntity product;
     @NotNull
     private Integer value;
 
@@ -26,12 +26,12 @@ public class ProductLineEntity {
         this.id = id;
     }
 
-    public ProductEntity getProductEntity() {
-        return productEntity;
+    public ProductEntity getProduct() {
+        return product;
     }
 
-    public void setProductEntity(ProductEntity productEntity) {
-        this.productEntity = productEntity;
+    public void setProduct(ProductEntity product) {
+        this.product = product;
     }
 
     public Integer getValue() {

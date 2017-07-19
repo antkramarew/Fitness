@@ -3,6 +3,7 @@ package fitness.persistence.repository.spring;
 import fitness.service.exeption.ResourceNotFoundException;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
@@ -22,13 +23,14 @@ public class ExtendedJpaRepository<T, ID extends Serializable> extends SimpleJpa
     }
 
     @Override
+    @Transactional
     public void delete(ID id) {
         Assert.notNull(id, "The given id must not be null!");
         T entity = this.findOne(id);
         if(entity == null) {
             throw new ResourceNotFoundException(id);
         } else {
-            this.delete(entity);
+            super.delete(entity);
         }
     }
 }

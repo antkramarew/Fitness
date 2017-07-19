@@ -1,6 +1,7 @@
 package fitness.domain.dto.types;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import static java.util.Objects.requireNonNull;
 
@@ -16,8 +17,7 @@ public class Fat {
     }
 
     public static Fat of(Integer value) {
-        requireNonNull(value);
-        return new Fat(value);
+        return new Fat(Optional.ofNullable(value).orElse(0));
     }
 
     public Integer toInteger() {
@@ -30,7 +30,7 @@ public class Fat {
     }
 
     public static Fat of(Fat fat) {
-        requireNonNull(fat);
-        return of(fat.toInteger());
+        return of(Optional.ofNullable(fat)
+                .map(Fat::toInteger).orElse(0));
     }
 }

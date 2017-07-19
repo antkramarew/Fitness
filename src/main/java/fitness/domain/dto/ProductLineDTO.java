@@ -17,15 +17,14 @@ public class ProductLineDTO {
     private Integer value;
     private NutritionFacts totals;
 
-    private ProductLineDTO(Long id, ProductDTO product, Integer value, NutritionFacts totals) {
+    public ProductLineDTO(Long id, ProductDTO product, Integer value, NutritionFacts totals) {
         this.id = id;
         this.product = product;
         this.value = value;
         this.totals = totals;
     }
 
-    public static ProductLineDTO of(Long id, ProductDTO product, Integer value, NutritionFacts totalNutritionFacts) {
-        return new ProductLineDTO(id, product, value, totalNutritionFacts);
+    public ProductLineDTO() {
     }
 
     public ProductLineDTO apply(ProductLineOperation operation) {
@@ -51,5 +50,17 @@ public class ProductLineDTO {
     public ProductLineDTO withTotals(NutritionFacts totalNutritionFacts) {
         this.totals = totalNutritionFacts;
         return this;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setProduct(ProductDTO product) {
+        this.product = product;
+    }
+
+    public void setValue(Integer value) {
+        this.value = value;
     }
 }

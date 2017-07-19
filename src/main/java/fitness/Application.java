@@ -2,6 +2,8 @@ package fitness;
 
 import fitness.domain.dto.types.*;
 import fitness.persistence.entity.ProductEntity;
+import fitness.persistence.entity.ProductLineEntity;
+import fitness.persistence.repository.ProductLineRepository;
 import fitness.persistence.repository.ProductRepository;
 import fitness.persistence.repository.spring.ExtendedJpaRepository;
 import org.dozer.DozerBeanMapper;
@@ -30,17 +32,26 @@ public class Application {
     }
 
     @Bean
-    public CommandLineRunner productDemo(ProductRepository productRepository) {
+    public CommandLineRunner productDemo(ProductRepository productRepository, ProductLineRepository productLineRepository) {
         return args -> {
-            productRepository.save(initProduct());
+            ProductEntity product = productRepository.save(initProduct());
+            productLineRepository.save(initProductLine(product));
+
         };
+    }
+
+    private ProductLineEntity initProductLine(ProductEntity product) {
+        ProductLineEntity lineEntity = new ProductLineEntity();
+        lineEntity.setProduct(product);
+        lineEntity.setValue(150);
+        return lineEntity;
     }
 
     private ProductEntity initProduct() {
         ProductEntity product = new ProductEntity();
         product.setName("Test product");
         product.setMeasure(Measure.WEIGHT);
-        product.setNutritionFacts(new NutritionFacts(Calories.of(1), Fat.of(1), Carbohydrate.of(1), Protein.of(1) ));
+        product.setNutritionFacts(NutritionFacts.of(Calories.of(120), Fat.of(3), Carbohydrate.of(4), Protein.of(20) ));
         return product;
     }
 

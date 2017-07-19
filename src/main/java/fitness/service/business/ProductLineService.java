@@ -8,14 +8,11 @@ import org.springframework.data.domain.Pageable;
 /**
  * Created by Anton_Kramarev on 6/18/2017.
  */
-public interface ProductService {
+public interface ProductLineService {
 
-    ProductDTO createProduct(ProductDTO productDTO);
+    ProductLineDTO createProductLine(ProductLineDTO lineDTO);
 
-    ProductDTO getProduct(Long productId);
+    void deleteProductLine(Long lineId);
 
-    void deleteProduct(Long productId);
-
-    Page<ProductDTO> getProductByName(String name, Pageable pageable);
-
+    ProductLineDTO getProductLine(Long lineId);
 }

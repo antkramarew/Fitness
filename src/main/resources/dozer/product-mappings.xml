@@ -24,6 +24,25 @@
         </field>
     </mapping>
 
+    <mapping>
+        <class-a>fitness.domain.dto.ProductLineDTO</class-a>
+        <class-b>fitness.rest.model.ProductLineResponseModel</class-b>
+        <field>
+            <a>id</a>
+            <b>lineId</b>
+        </field>
+        <field>
+            <a>product.name</a>
+            <b>productName</b>
+        </field>
+        <field custom-converter="fitness.dozer.NutritionFactsConverter">
+            <a set-method="withTotals">totals</a>
+            <b >totals</b>
+        </field>
+
+    </mapping>
+
+
     <mapping bean-factory="fitness.dozer.NutritionFactsBeanFactory">
         <class-a>fitness.domain.dto.types.NutritionFacts</class-a>
         <class-b>fitness.domain.dto.types.NutritionFacts</class-b>

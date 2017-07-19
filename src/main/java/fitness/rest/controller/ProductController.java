@@ -1,8 +1,6 @@
 package fitness.rest.controller;
 
 import fitness.domain.dto.ProductDTO;
-import fitness.domain.dto.ProductLineDTO;
-import fitness.rest.model.ProductLineModel;
 import fitness.rest.model.ProductModel;
 import fitness.service.business.ProductService;
 import org.dozer.DozerBeanMapper;
@@ -68,14 +66,6 @@ public class ProductController {
         productModels.forEach(productModel -> productModel.add(linkTo(
                 methodOn(ProductController.class).getProduct(productModel.getProductId())).withSelfRel()));
         return new ResponseEntity<>(productModels, HttpStatus.OK);
-    }
-    @GetMapping(value = "/line/{productLineId}")
-    @ResponseBody
-    public ResponseEntity<ProductLineModel> getProductLine(@PathVariable Long productLineId) {
-        ProductLineDTO productLineDTO = this.productService.getProductLine(productLineId);
-        ProductLineModel model = mapper.map(productLineDTO, ProductLineModel.class);
-        model.add(linkTo(methodOn(ProductController.class).getProductLine(productLineId)).withSelfRel());
-        return new ResponseEntity<ProductLineModel>(model, HttpStatus.OK);
     }
 
 }

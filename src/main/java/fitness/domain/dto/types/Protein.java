@@ -1,5 +1,7 @@
 package fitness.domain.dto.types;
 
+import java.util.Optional;
+
 /**
  * Created by toxa on 7/13/2017.
  */
@@ -12,7 +14,7 @@ public class Protein {
     }
 
     public static Protein of(Integer value) {
-        return new Protein(value);
+        return new Protein(Optional.ofNullable(value).orElse(0));
     }
 
     public Integer toInteger() {
@@ -25,6 +27,7 @@ public class Protein {
     }
 
     public static Protein of(Protein protein) {
-        return of(protein.toInteger());
+        return of(Optional.ofNullable(protein)
+                .map(Protein::toInteger).orElse(0));
     }
 }

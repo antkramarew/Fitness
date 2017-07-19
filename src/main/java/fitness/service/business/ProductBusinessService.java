@@ -24,8 +24,6 @@ public class ProductBusinessService implements ProductService {
     @Autowired
     private ProductRepository productRepository;
     @Autowired
-    private ProductLineRepository productLineRepository;
-    @Autowired
     private ValidationManager validationManager;
 
     @Autowired
@@ -59,11 +57,5 @@ public class ProductBusinessService implements ProductService {
         return products.map(productEntity -> mapper.map(productEntity, ProductDTO.class));
     }
 
-    @Override
-    public ProductLineDTO getProductLine(Long id) {
-         return this.productLineRepository.findProductLineById(id)
-                 .map(productLineEntity -> mapper.map(productLineEntity, ProductLineDTO.class))
-                 .map(productLineDTO -> productLineDTO.apply(ProductLineOperations.COUNT_TOTAL_NUTRITION_FACTS))
-                 .orElseThrow(() -> new ResourceNotFoundException(id));
-    }
+
 }

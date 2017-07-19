@@ -17,7 +17,7 @@ public class ProductHelper {
         NutritionFacts facts = product.getNutritionFacts();
 
         Integer lineValue = line.getValue();
-        NutritionFacts totals = new NutritionFacts(
+        NutritionFacts totals = NutritionFacts.of(
                 Calories.of(measure.apply(facts.getCalories().toInteger(), lineValue)),
                 Fat.of(measure.apply(facts.getFat().toInteger(), lineValue)),
                 Carbohydrate.of(measure.apply(facts.getCarbohydrate().toInteger(), lineValue)),
