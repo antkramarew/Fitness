@@ -1,5 +1,6 @@
 package fitness.rest.controller;
 
+import com.google.common.collect.Lists;
 import fitness.domain.dto.ProductLineDTO;
 import fitness.rest.model.ProductLineModel;
 import fitness.rest.model.ProductLineResponseModel;
@@ -7,10 +8,13 @@ import fitness.service.business.ProductLineService;
 import fitness.service.business.ProductService;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -36,10 +40,16 @@ public class ProductLineController {
     @ResponseBody
     public ResponseEntity<ProductLineResponseModel> getProductLine(@PathVariable Long productLineId) {
         ProductLineDTO productLineDTO = this.productLineService.getProductLine(productLineId);
-        ProductLineResponseModel model = mapper.map(productLineDTO, ProductLineResponseModel.class);
-        model.add(linkTo(methodOn(ProductLineController.class).getProductLine(productLineId)).withSelfRel());
-        model.add(linkTo(methodOn(ProductController.class).getProduct(productLineDTO.getProduct().getId())).withRel("product"));
-        return new ResponseEntity<>(model, HttpStatus.OK);
+        ProductLineResponseModel response = mapper.map(productLineDTO, ProductLineResponseModel.class);
+        response.add(createLinks(productLineDTO, response));
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    private static List<Link> createLinks(ProductLineDTO productLineDTO, ProductLineResponseModel model) {
+        return Lists.newArrayList(
+                linkTo(methodOn(ProductLineController.class).getProductLine(model.getLineId())).withSelfRel(),
+                linkTo(methodOn(ProductController.class).getProduct(productLineDTO.getProduct().getId())).withRel("product")
+        );
     }
 
     @PostMapping
@@ -49,8 +59,7 @@ public class ProductLineController {
         line.setProduct(productService.getProduct(request.getProductId()));
         ProductLineDTO createdLine = this.productLineService.createProductLine(line);
         ProductLineResponseModel response = mapper.map(createdLine, ProductLineResponseModel.class);
-        response.add(linkTo(methodOn(ProductLineController.class).getProductLine(response.getLineId())).withSelfRel());
-        response.add(linkTo(methodOn(ProductController.class).getProduct(request.getProductId())).withRel("product"));
+        response.add(createLinks(createdLine, response));
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
