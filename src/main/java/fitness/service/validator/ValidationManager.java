@@ -1,7 +1,6 @@
 package fitness.service.validator;
 
 import fitness.service.exeption.ValidationException;
-import fitness.service.utils.ErrorCode;
 import org.springframework.stereotype.Service;
 
 import javax.validation.ConstraintViolation;
@@ -27,7 +26,7 @@ public class ValidationManager {
 
     public <T> Set<String> validate(T validationObject) {
         Set<ConstraintViolation<T>> violations = validator.validate(validationObject);
-        return violations.stream().map(v -> v.getMessage()).collect(Collectors.toSet());
+        return violations.stream().map(ConstraintViolation::getMessage).collect(Collectors.toSet());
     }
 
     public <T> void validateAndThrow(T validationObject) {

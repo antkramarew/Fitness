@@ -19,8 +19,8 @@
             <b>productId</b>
         </field>
         <field custom-converter="fitness.dozer.NutritionFactsConverter">
-            <a>nutritionFacts</a>
-            <b>nutritionFacts</b>
+            <a>totals</a>
+            <b>totals</b>
         </field>
     </mapping>
 

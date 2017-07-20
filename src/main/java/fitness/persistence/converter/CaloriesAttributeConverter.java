@@ -1,7 +1,6 @@
 package fitness.persistence.converter;
 
 import fitness.domain.dto.types.Calories;
-import fitness.domain.dto.types.Protein;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

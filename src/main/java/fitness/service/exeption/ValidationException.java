@@ -1,7 +1,5 @@
 package fitness.service.exeption;
 
-import fitness.service.utils.ErrorCode;
-
 import java.util.Set;
 
 /**
@@ -9,7 +7,7 @@ import java.util.Set;
  */
 public class ValidationException extends RuntimeException{
 
-    private Set<String> errorCodes;
+    private final Set<String> errorCodes;
 
     public ValidationException(Set<String> errorCodes) {
         this.errorCodes = errorCodes;

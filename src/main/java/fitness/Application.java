@@ -13,8 +13,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import java.io.IOException;
-
 import static java.util.Arrays.asList;
 
 @SpringBootApplication
@@ -26,9 +24,8 @@ public class Application {
     }
 
     @Bean(name = "dozerMapper")
-    public DozerBeanMapper dozerMapper() throws IOException {
-        DozerBeanMapper mapper = new DozerBeanMapper(asList("dozer/product-mappings.xml"));
-        return mapper;
+    public DozerBeanMapper dozerMapper() {
+        return new DozerBeanMapper(asList("dozer/product-mappings.xml"));
     }
 
     @Bean

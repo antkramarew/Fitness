@@ -1,14 +1,6 @@
 package fitness.dozer;
 
-import fitness.service.exeption.ApiInternalServerErrorException;
 import org.dozer.CustomConverter;
-import org.dozer.DozerConverter;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.Objects;
-
-import static java.util.Objects.*;
 
 /**
  * Created by toxa on 7/13/2017.

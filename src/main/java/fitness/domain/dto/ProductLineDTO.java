@@ -1,7 +1,8 @@
 package fitness.domain.dto;
 
-import fitness.domain.dto.types.NutritionFacts;
+import fitness.domain.dto.types.*;
 import fitness.domain.utils.ProductLineOperation;
+import fitness.domain.utils.ProductLineOperations;
 import fitness.service.utils.ValidationConstants;
 
 import javax.validation.constraints.NotNull;
@@ -16,20 +17,14 @@ public class ProductLineDTO {
     private ProductDTO product;
     @NotNull(message = ValidationConstants.PRODUCT_LINE_VALUE_REQUIRED)
     private Integer value;
-    private NutritionFacts totals;
 
-    public ProductLineDTO(Long id, ProductDTO product, Integer value, NutritionFacts totals) {
+    public ProductLineDTO(Long id, ProductDTO product, Integer value) {
         this.id = id;
         this.product = product;
         this.value = value;
-        this.totals = totals;
     }
 
     public ProductLineDTO() {
-    }
-
-    public ProductLineDTO apply(ProductLineOperation operation) {
-        return operation.apply(this);
     }
 
     public Long getId() {
@@ -44,15 +39,6 @@ public class ProductLineDTO {
         return value;
     }
 
-    public NutritionFacts getTotals() {
-        return totals;
-    }
-
-    public ProductLineDTO withTotals(NutritionFacts totalNutritionFacts) {
-        this.totals = totalNutritionFacts;
-        return this;
-    }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -63,5 +49,18 @@ public class ProductLineDTO {
 
     public void setValue(Integer value) {
         this.value = value;
+    }
+
+    public Protein getProtein() {
+        return Protein.of(product.getMeasure().apply(product.getProtein().toInteger(), getValue()));
+    }
+    public Calories getCalories() {
+        return Calories.of(product.getMeasure().apply(product.getCalories().toInteger(), getValue()));
+    }
+    public Fat getFat() {
+        return Fat.of(product.getMeasure().apply(product.getFat().toInteger(), getValue()));
+    }
+    public Carbohydrate getCarbohydrate() {
+        return Carbohydrate.of(product.getMeasure().apply(product.getCarbohydrate().toInteger(), getValue()));
     }
 }

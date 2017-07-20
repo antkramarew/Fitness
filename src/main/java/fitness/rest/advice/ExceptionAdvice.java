@@ -49,10 +49,10 @@ public class ExceptionAdvice {
     }
 
     private String resolvePointer(String code) {
-        return "pointer";
+        return "pointer" + code;
     }
 
     private String resolveDescription(String code) {
-        return "description";
+        return "description" + code;
     }
 }

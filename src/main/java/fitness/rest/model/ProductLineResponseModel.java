@@ -1,6 +1,7 @@
 package fitness.rest.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.Objects;
 import org.springframework.hateoas.ResourceSupport;
 
 /**
@@ -10,7 +11,7 @@ public class ProductLineResponseModel extends ResourceSupport {
     private Long lineId;
     private Integer value;
     private String productName;
-    private NutritionFactsModel totals;
+    private Totals totals;
 
     @JsonProperty("id")
     public Long getLineId() {
@@ -37,11 +38,11 @@ public class ProductLineResponseModel extends ResourceSupport {
         this.productName = productName;
     }
 
-    public NutritionFactsModel getTotals() {
+    public Totals getTotals() {
         return totals;
     }
 
-    public void setTotals(NutritionFactsModel totals) {
+    public void setTotals(Totals totals) {
         this.totals = totals;
     }
 

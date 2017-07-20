@@ -45,11 +45,11 @@ public class ProductLineController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    private static List<Link> createLinks(ProductLineDTO productLineDTO, ProductLineResponseModel model) {
-        return Lists.newArrayList(
-                linkTo(methodOn(ProductLineController.class).getProductLine(model.getLineId())).withSelfRel(),
-                linkTo(methodOn(ProductController.class).getProduct(productLineDTO.getProduct().getId())).withRel("product")
-        );
+    @DeleteMapping(value = "/{productLineId}")
+    @ResponseBody
+    public ResponseEntity deleteProductLine(@PathVariable Long productLineId) {
+        productLineService.deleteProductLine(productLineId);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @PostMapping
@@ -61,6 +61,13 @@ public class ProductLineController {
         ProductLineResponseModel response = mapper.map(createdLine, ProductLineResponseModel.class);
         response.add(createLinks(createdLine, response));
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    private static List<Link> createLinks(ProductLineDTO productLineDTO, ProductLineResponseModel model) {
+        return Lists.newArrayList(
+                linkTo(methodOn(ProductLineController.class).getProductLine(model.getLineId())).withSelfRel(),
+                linkTo(methodOn(ProductController.class).getProduct(productLineDTO.getProduct().getId())).withRel("product")
+        );
     }
 
 }

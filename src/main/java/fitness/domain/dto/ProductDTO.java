@@ -1,16 +1,10 @@
 package fitness.domain.dto;
 
 import com.google.common.base.Objects;
-import fitness.domain.dto.types.Measure;
-import fitness.domain.dto.types.NutritionFacts;
-import fitness.service.utils.ErrorCode;
+import fitness.domain.dto.types.*;
 import fitness.service.utils.ValidationConstants;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-import org.hibernate.hql.internal.ast.ErrorCounter;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -27,8 +21,10 @@ public class ProductDTO {
     @NotNull
     private Measure measure;
 
-    @NotNull(message = ValidationConstants.NUTRITION_FACTS_REQUIRED)
-    private NutritionFacts nutritionFacts;
+    private Protein protein;
+    private Calories calories;
+    private Fat fat;
+    private Carbohydrate carbohydrate;
 
     public String getName() {
         return name;
@@ -46,13 +42,6 @@ public class ProductDTO {
         this.measure = measure;
     }
 
-    public NutritionFacts getNutritionFacts() {
-        return nutritionFacts;
-    }
-
-    public void setNutritionFacts(NutritionFacts nutritionFacts) {
-        this.nutritionFacts = nutritionFacts;
-    }
 
     public Long getId() {
         return id;
@@ -62,19 +51,35 @@ public class ProductDTO {
         this.id = id;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ProductDTO productDTO = (ProductDTO) o;
-        return Objects.equal(id, productDTO.id) &&
-                Objects.equal(name, productDTO.name) &&
-                Objects.equal(measure, productDTO.measure) &&
-                Objects.equal(nutritionFacts, productDTO.nutritionFacts);
+    public Protein getProtein() {
+        return protein;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id, name, measure, nutritionFacts);
+    public void setProtein(Protein protein) {
+        this.protein = protein;
+    }
+
+    public Calories getCalories() {
+        return calories;
+    }
+
+    public void setCalories(Calories calories) {
+        this.calories = calories;
+    }
+
+    public Fat getFat() {
+        return fat;
+    }
+
+    public void setFat(Fat fat) {
+        this.fat = fat;
+    }
+
+    public Carbohydrate getCarbohydrate() {
+        return carbohydrate;
+    }
+
+    public void setCarbohydrate(Carbohydrate carbohydrate) {
+        this.carbohydrate = carbohydrate;
     }
 }

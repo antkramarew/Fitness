@@ -21,10 +21,6 @@ public class Carbohydrate {
         return value;
     }
 
-    private static Carbohydrate zeroValue() {
-        return Carbohydrate.of(0);
-    }
-
     @Override
     public String toString() {
         return value.toString();

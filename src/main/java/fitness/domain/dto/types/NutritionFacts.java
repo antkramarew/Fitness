@@ -1,7 +1,6 @@
 package fitness.domain.dto.types;
 
 import javax.persistence.Embeddable;
-import javax.validation.constraints.NotNull;
 
 /**
  * Created by Anton_Kramarev on 6/16/2017.

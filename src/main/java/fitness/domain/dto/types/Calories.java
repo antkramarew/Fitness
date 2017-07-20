@@ -1,10 +1,5 @@
 package fitness.domain.dto.types;
 
-import com.google.common.base.Objects;
-
-import java.util.Optional;
-
-import static java.util.Objects.requireNonNull;
 import static java.util.Optional.ofNullable;
 
 /**
@@ -27,6 +22,7 @@ public class Calories {
         return Calories.of(ofNullable(c)
                 .map(Calories::toInteger).orElse(0));
     }
+
     public Integer toInteger() {
         return value;
     }

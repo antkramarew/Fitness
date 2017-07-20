@@ -5,6 +5,9 @@ package fitness.service.utils;
  */
 public class ValidationConstants {
 
+    private ValidationConstants() {
+    }
+
     public static final String PRODUCT_NAME_TOO_LONG = "PRODUCT_NAME_TOO_LONG";
     public static final String NUTRITION_FACTS_REQUIRED = "NUTRITION_FACTS_REQUIRED";
     public static final String PRODUCT_NAME_IS_EMPTY = "PRODUCT_NAME_IS_EMPTY";

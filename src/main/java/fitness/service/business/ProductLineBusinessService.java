@@ -28,7 +28,7 @@ public class ProductLineBusinessService implements ProductLineService {
         validationManager.validateAndThrow(lineDTO);
         ProductLineEntity lineEntity = mapper.map(lineDTO, ProductLineEntity.class);
         ProductLineEntity savedLine = lineRepository.save(lineEntity);
-        return mapper.map(savedLine, ProductLineDTO.class).apply(ProductLineOperations.UPDATE_TOTALS);
+        return mapper.map(savedLine, ProductLineDTO.class);
     }
 
     @Override
@@ -40,7 +40,6 @@ public class ProductLineBusinessService implements ProductLineService {
     public ProductLineDTO getProductLine(Long id) {
         return this.lineRepository.findProductLineById(id)
                 .map(productLineEntity -> mapper.map(productLineEntity, ProductLineDTO.class))
-                .map(productLineDTO -> productLineDTO.apply(ProductLineOperations.UPDATE_TOTALS))
                 .orElseThrow(() -> new ResourceNotFoundException(id));
     }
 }

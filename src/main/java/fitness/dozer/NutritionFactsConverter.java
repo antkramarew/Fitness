@@ -1,23 +1,23 @@
 package fitness.dozer;
 
 import fitness.domain.dto.types.*;
-import fitness.rest.model.NutritionFactsModel;
+import fitness.rest.model.Totals;
 import org.dozer.DozerConverter;
 
 /**
  * Created by toxa on 7/14/2017.
  */
-public class NutritionFactsConverter extends DozerConverter<NutritionFacts, NutritionFactsModel> {
+public class NutritionFactsConverter extends DozerConverter<NutritionFacts, Totals> {
     public NutritionFactsConverter() {
-        super(NutritionFacts.class, NutritionFactsModel.class);
+        super(NutritionFacts.class, Totals.class);
     }
 
     @Override
-    public NutritionFactsModel convertTo(NutritionFacts dto, NutritionFactsModel input) {
+    public Totals convertTo(NutritionFacts dto, Totals input) {
         if (null == dto) {
             return null;
         }
-        NutritionFactsModel model = new NutritionFactsModel();
+        Totals model = new Totals();
         model.setCalories(dto.getCalories().toInteger());
         model.setCarbohydrate(dto.getCarbohydrate().toInteger());
         model.setFat(dto.getFat().toInteger());
@@ -26,7 +26,7 @@ public class NutritionFactsConverter extends DozerConverter<NutritionFacts, Nutr
     }
 
     @Override
-    public NutritionFacts convertFrom(NutritionFactsModel model, NutritionFacts input) {
+    public NutritionFacts convertFrom(Totals model, NutritionFacts input) {
         if (null == model) {
             return null;
         }

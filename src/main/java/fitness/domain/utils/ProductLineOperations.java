@@ -1,7 +1,6 @@
 package fitness.domain.utils;
 
 import fitness.domain.dto.ProductLineDTO;
-import fitness.service.utils.ProductHelper;
 
 /**
  * Created by Anton_Kramarev on 6/23/2017.

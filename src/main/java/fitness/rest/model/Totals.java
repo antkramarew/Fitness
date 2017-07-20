@@ -3,7 +3,7 @@ package fitness.rest.model;
 /**
  * Created by Anton_Kramarev on 6/16/2017.
  */
-public class NutritionFactsModel {
+public class Totals {
 
     private Integer calories;
     private Integer fat;

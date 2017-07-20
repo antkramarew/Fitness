@@ -1,10 +1,7 @@
 package fitness.service.business;
 
 import fitness.domain.dto.ProductDTO;
-import fitness.domain.dto.ProductLineDTO;
-import fitness.domain.utils.ProductLineOperations;
 import fitness.persistence.entity.ProductEntity;
-import fitness.persistence.repository.ProductLineRepository;
 import fitness.persistence.repository.ProductRepository;
 import fitness.service.exeption.ResourceNotFoundException;
 import fitness.service.validator.ValidationManager;
