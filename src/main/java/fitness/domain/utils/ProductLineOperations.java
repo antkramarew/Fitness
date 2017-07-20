@@ -8,7 +8,7 @@ import fitness.service.utils.ProductHelper;
  */
 public enum ProductLineOperations implements ProductLineOperation {
 
-    COUNT_TOTAL_NUTRITION_FACTS {
+    UPDATE_TOTALS {
         @Override
         public ProductLineDTO apply(ProductLineDTO productLineDTO) {
             return ProductHelper.updateTotals(productLineDTO);

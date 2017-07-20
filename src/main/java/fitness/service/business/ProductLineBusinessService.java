@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 public class ProductLineBusinessService implements ProductLineService {
 
     @Autowired
-    private ProductLineRepository productLineRepository;
+    private ProductLineRepository lineRepository;
     @Autowired
     private DozerBeanMapper mapper;
     @Autowired
@@ -27,20 +27,20 @@ public class ProductLineBusinessService implements ProductLineService {
     public ProductLineDTO createProductLine(ProductLineDTO lineDTO) {
         validationManager.validateAndThrow(lineDTO);
         ProductLineEntity lineEntity = mapper.map(lineDTO, ProductLineEntity.class);
-        ProductLineEntity savedLine = productLineRepository.save(lineEntity);
-        return mapper.map(savedLine, ProductLineDTO.class).apply(ProductLineOperations.COUNT_TOTAL_NUTRITION_FACTS);
+        ProductLineEntity savedLine = lineRepository.save(lineEntity);
+        return mapper.map(savedLine, ProductLineDTO.class).apply(ProductLineOperations.UPDATE_TOTALS);
     }
 
     @Override
     public void deleteProductLine(Long lineId) {
-        this.productLineRepository.delete(lineId);
+        this.lineRepository.delete(lineId);
     }
 
     @Override
     public ProductLineDTO getProductLine(Long id) {
-        return this.productLineRepository.findProductLineById(id)
+        return this.lineRepository.findProductLineById(id)
                 .map(productLineEntity -> mapper.map(productLineEntity, ProductLineDTO.class))
-                .map(productLineDTO -> productLineDTO.apply(ProductLineOperations.COUNT_TOTAL_NUTRITION_FACTS))
+                .map(productLineDTO -> productLineDTO.apply(ProductLineOperations.UPDATE_TOTALS))
                 .orElseThrow(() -> new ResourceNotFoundException(id));
     }
 }

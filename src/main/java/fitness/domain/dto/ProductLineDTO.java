@@ -2,6 +2,7 @@ package fitness.domain.dto;
 
 import fitness.domain.dto.types.NutritionFacts;
 import fitness.domain.utils.ProductLineOperation;
+import fitness.service.utils.ValidationConstants;
 
 import javax.validation.constraints.NotNull;
 
@@ -13,7 +14,7 @@ public class ProductLineDTO {
     private Long id;
     @NotNull
     private ProductDTO product;
-    @NotNull
+    @NotNull(message = ValidationConstants.PRODUCT_LINE_VALUE_REQUIRED)
     private Integer value;
     private NutritionFacts totals;
 
