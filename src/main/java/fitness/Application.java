@@ -48,7 +48,10 @@ public class Application {
         ProductEntity product = new ProductEntity();
         product.setName("Test product");
         product.setMeasure(Measure.WEIGHT);
-        product.setNutritionFacts(NutritionFacts.of(Calories.of(120), Fat.of(3), Carbohydrate.of(4), Protein.of(20) ));
+        product.setCalories(Calories.of(100));
+        product.setFat(Fat.of(3));
+        product.setProtein(Protein.of(20));
+        product.setCarbohydrate(Carbohydrate.of(4));
         return product;
     }
 

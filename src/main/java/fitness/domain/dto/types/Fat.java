@@ -5,7 +5,7 @@ import java.util.Optional;
 /**
  * Created by toxa on 7/13/2017.
  */
-public class Fat {
+public class Fat{
 
     private Integer value;
 
@@ -30,4 +30,5 @@ public class Fat {
         return of(Optional.ofNullable(fat)
                 .map(Fat::toInteger).orElse(0));
     }
+
 }

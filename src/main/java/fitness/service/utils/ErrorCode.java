@@ -6,6 +6,7 @@ package fitness.service.utils;
 public enum ErrorCode {
 
     INTERNAL_SERVER_ERROR("Unknown server error occurred"),
+    RESOURCE_DELETE_FAILED("Resource with id: %s cannot be deleted"),
     RESOURCE_NOT_FOUND("Resource with id: %s not found");
 
     private final String message;

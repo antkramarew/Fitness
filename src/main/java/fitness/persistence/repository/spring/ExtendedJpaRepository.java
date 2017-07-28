@@ -1,6 +1,8 @@
 package fitness.persistence.repository.spring;
 
+import fitness.service.exeption.ResourceDeletionFailedException;
 import fitness.service.exeption.ResourceNotFoundException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +32,11 @@ public class ExtendedJpaRepository<T, ID extends Serializable> extends SimpleJpa
         if(entity == null) {
             throw new ResourceNotFoundException(id);
         } else {
-            super.delete(entity);
+            try {
+                super.delete(entity);
+            } catch (DataIntegrityViolationException exc) {
+                throw new ResourceDeletionFailedException(id);
+            }
         }
     }
 }

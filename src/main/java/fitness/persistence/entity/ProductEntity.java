@@ -1,10 +1,9 @@
 package fitness.persistence.entity;
 
-import com.google.common.base.Objects;
-import fitness.domain.dto.types.Measure;
-import fitness.domain.dto.types.NutritionFacts;
+import fitness.domain.dto.types.*;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * Created by Anton_Kramarev on 6/16/2017.
@@ -17,8 +16,10 @@ public class ProductEntity {
     private Long id;
     private String name;
     private Measure measure;
-    @Embedded
-    private NutritionFacts nutritionFacts;
+    private Protein protein;
+    private Fat fat;
+    private Carbohydrate carbohydrate;
+    private Calories calories;
 
     public String getName() {
         return name;
@@ -36,13 +37,6 @@ public class ProductEntity {
         this.measure = measure;
     }
 
-    public NutritionFacts getNutritionFacts() {
-        return nutritionFacts;
-    }
-
-    public void setNutritionFacts(NutritionFacts nutritionFacts) {
-        this.nutritionFacts = nutritionFacts;
-    }
 
     public Long getId() {
         return id;
@@ -52,19 +46,54 @@ public class ProductEntity {
         this.id = id;
     }
 
+    public Protein getProtein() {
+        return protein;
+    }
+
+    public void setProtein(Protein protein) {
+        this.protein = protein;
+    }
+
+    public Fat getFat() {
+        return fat;
+    }
+
+    public void setFat(Fat fat) {
+        this.fat = fat;
+    }
+
+    public Carbohydrate getCarbohydrate() {
+        return carbohydrate;
+    }
+
+    public void setCarbohydrate(Carbohydrate carbohydrate) {
+        this.carbohydrate = carbohydrate;
+    }
+
+    public Calories getCalories() {
+        return calories;
+    }
+
+    public void setCalories(Calories calories) {
+        this.calories = calories;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ProductEntity productEntity = (ProductEntity) o;
-        return Objects.equal(id, productEntity.id) &&
-                Objects.equal(name, productEntity.name) &&
-                Objects.equal(measure, productEntity.measure) &&
-                Objects.equal(nutritionFacts, productEntity.nutritionFacts);
+        ProductEntity that = (ProductEntity) o;
+        return java.util.Objects.equals(id, that.id) &&
+                java.util.Objects.equals(name, that.name) &&
+                measure == that.measure &&
+                Objects.equals(protein, that.protein) &&
+                Objects.equals(fat, that.fat) &&
+                Objects.equals(carbohydrate, that.carbohydrate) &&
+                Objects.equals(calories, that.calories);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, name, measure, nutritionFacts);
+        return java.util.Objects.hash(id, name, measure, protein, fat, carbohydrate, calories);
     }
 }

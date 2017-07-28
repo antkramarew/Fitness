@@ -2,6 +2,8 @@ package fitness.dozer;
 
 import org.dozer.CustomConverter;
 
+import static java.util.Objects.isNull;
+
 /**
  * Created by toxa on 7/13/2017.
  */
@@ -9,7 +11,7 @@ public class StringEnumConverter implements CustomConverter {
 
     @Override
     public Object convert(Object dst, Object src, Class<?> destinationClass, Class<?> sourceClass) {
-        if (null == src)
+        if (isNull(src))
             return null;
         if (String.class.isAssignableFrom(sourceClass)
                 && Enum.class.isAssignableFrom(destinationClass)) {

@@ -10,7 +10,8 @@ public enum ProductLineOperations implements ProductLineOperation {
     UPDATE_TOTALS {
         @Override
         public ProductLineDTO apply(ProductLineDTO productLineDTO) {
-            return ProductHelper.updateTotals(productLineDTO);
+            return null;
+            //return ProductHelper.updateTotals(productLineDTO);
         }
     };
 }
