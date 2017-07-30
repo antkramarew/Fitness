@@ -12,7 +12,7 @@ public class MealEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    @ElementCollection
+    @OneToMany
     private List<ProductLineEntity> lines;
 
     public Long getId() {

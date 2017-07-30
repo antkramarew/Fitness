@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 /**
  * Created by Anton_Kramarev on 6/23/2017.
  */
-public class ProductLineDTO {
+public class ProductLineDTO implements Nutrition {
 
     private Long id;
     @NotNull
@@ -51,16 +51,11 @@ public class ProductLineDTO {
         this.value = value;
     }
 
-    public Protein getProtein() {
-        return Protein.of(product.getMeasure().apply(product.getProtein().toInteger(), getValue()));
-    }
-    public Calories getCalories() {
-        return Calories.of(product.getMeasure().apply(product.getCalories().toInteger(), getValue()));
-    }
-    public Fat getFat() {
-        return Fat.of(product.getMeasure().apply(product.getFat().toInteger(), getValue()));
-    }
-    public Carbohydrate getCarbohydrate() {
-        return Carbohydrate.of(product.getMeasure().apply(product.getCarbohydrate().toInteger(), getValue()));
+    public Totals getTotals() {
+        return Totals.of(product.getMeasure().apply(product.getTotals().getProtein(), value),
+                product.getMeasure().apply(product.getTotals().getFat(), value),
+                product.getMeasure().apply(product.getTotals().getCarbohydrate(), value),
+                product.getMeasure().apply(product.getTotals().getCalories(), value)
+                );
     }
 }

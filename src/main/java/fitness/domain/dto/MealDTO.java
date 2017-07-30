@@ -1,18 +1,32 @@
 package fitness.domain.dto;
 
-import fitness.domain.dto.types.MealItems;
+import com.google.common.collect.Lists;
+import fitness.domain.dto.types.Nutrition;
+import fitness.domain.dto.types.NutritionItems;
+import fitness.domain.dto.types.Totals;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import java.util.List;
 
 /**
  * Created by Anton_Kramarev on 7/20/2017.
  */
-public class MealDTO {
+public class MealDTO implements Nutrition{
+
 
     private Long id;
+    @NotEmpty
     private String name;
 
-    private List<ProductLineDTO> items;
+    private List<ProductLineDTO> lines = Lists.newArrayList();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -22,19 +36,16 @@ public class MealDTO {
         this.name = name;
     }
 
-    public MealItems getItems() {
-        return MealItems.of(items);
+    public NutritionItems<ProductLineDTO> getLines() {
+        return new NutritionItems<>(lines);
     }
 
-    public void setItems(List<ProductLineDTO> items) {
-        this.items = items;
+    public void setLines(List<ProductLineDTO> lines) {
+        this.lines = lines;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public Totals getTotals() {
+        return getLines().getTotals();
     }
 }

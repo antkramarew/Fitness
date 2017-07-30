@@ -1,19 +1,20 @@
 package fitness.rest.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.springframework.hateoas.ResourceSupport;
 
 /**
  * Created by Anton_Kramarev on 6/26/2017.
  */
+@JsonPropertyOrder({"id", "productName"})
 public class ProductLineResponseModel extends ResourceSupport {
     private Long lineId;
     private Integer value;
     private String productName;
-    private Totals totals;
+    private TotalsModel totals;
 
-    @JsonProperty("id")
+    @JsonProperty(value = "id")
     public Long getLineId() {
         return lineId;
     }
@@ -38,11 +39,11 @@ public class ProductLineResponseModel extends ResourceSupport {
         this.productName = productName;
     }
 
-    public Totals getTotals() {
+    public TotalsModel getTotals() {
         return totals;
     }
 
-    public void setTotals(Totals totals) {
+    public void setTotals(TotalsModel totals) {
         this.totals = totals;
     }
 

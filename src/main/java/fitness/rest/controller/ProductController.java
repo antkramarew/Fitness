@@ -3,6 +3,7 @@ package fitness.rest.controller;
 import fitness.domain.dto.ProductDTO;
 import fitness.rest.model.ProductModel;
 import fitness.service.business.ProductService;
+import fitness.service.validator.ValidationManager;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,7 +27,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
         produces = MediaType.APPLICATION_JSON_VALUE, value = "/api/v1/products")
 public class ProductController {
 
-    public static final String MAP_ID = "productToModel";
+    @Autowired
+    private ValidationManager validationManager;
     @Autowired
     private ProductService productService;
     @Autowired
@@ -35,9 +37,10 @@ public class ProductController {
     @PostMapping
     @ResponseBody
     public ResponseEntity<ProductModel> createProduct(@RequestBody ProductModel model) {
-        ProductDTO productDTO = mapper.map(model, ProductDTO.class, MAP_ID);
+        ProductDTO productDTO = mapper.map(model, ProductDTO.class);
+        validationManager.validateAndThrow(productDTO);
         ProductDTO savedProductDTO = productService.createProduct(productDTO);
-        ProductModel createdProduct = mapper.map(savedProductDTO, ProductModel.class, MAP_ID);
+        ProductModel createdProduct = mapper.map(savedProductDTO, ProductModel.class);
         createdProduct.add(linkTo(methodOn(ProductController.class).getProduct(createdProduct.getProductId())).withSelfRel());
         return new ResponseEntity(createdProduct, HttpStatus.CREATED);
     }
@@ -46,7 +49,7 @@ public class ProductController {
     @ResponseBody
     public ResponseEntity<ProductModel> getProduct(@PathVariable Long productId) {
         ProductDTO product = this.productService.getProduct(productId);
-        ProductModel productModel = mapper.map(product, ProductModel.class, MAP_ID);
+        ProductModel productModel = mapper.map(product, ProductModel.class);
         productModel.add(linkTo(methodOn(ProductController.class).getProduct(productId)).withSelfRel());
         return  new ResponseEntity(productModel, HttpStatus.OK);
     }
@@ -62,7 +65,7 @@ public class ProductController {
     @ResponseBody
     public ResponseEntity<Page<ProductModel>> getProductsByName(@Param("name") String name, Pageable pageable) {
         Page<ProductDTO> productsByName = this.productService.getProductByName(name, pageable);
-        Page<ProductModel> productModels = productsByName.map(p -> mapper.map(p, ProductModel.class, MAP_ID));
+        Page<ProductModel> productModels = productsByName.map(p -> mapper.map(p, ProductModel.class));
         productModels.forEach(productModel -> productModel.add(linkTo(
                 methodOn(ProductController.class).getProduct(productModel.getProductId())).withSelfRel()));
         return new ResponseEntity<>(productModels, HttpStatus.OK);

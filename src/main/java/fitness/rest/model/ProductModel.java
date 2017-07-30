@@ -10,7 +10,8 @@ public class ProductModel extends ResourceSupport {
     private Long productId;
     private String name;
     private String measure;
-    private Totals totals;
+    private TotalsModel totals;
+    private String description;
 
 
     public String getName() {
@@ -29,11 +30,11 @@ public class ProductModel extends ResourceSupport {
         this.name = name;
     }
 
-    public Totals getTotals() {
+    public TotalsModel getTotals() {
         return totals;
     }
 
-    public void setTotals(Totals totals) {
+    public void setTotals(TotalsModel totals) {
         this.totals = totals;
     }
 
@@ -43,5 +44,13 @@ public class ProductModel extends ResourceSupport {
 
     public void setMeasure(String measure) {
         this.measure = measure;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
