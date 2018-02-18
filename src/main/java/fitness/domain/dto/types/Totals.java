@@ -10,11 +10,11 @@ import javax.validation.constraints.NotNull;
 
 public class Totals {
 
-    public static final int MAX_PROTEIN_VALUE = 1000;
-    public static final int MIN_NUTRIENT_VALUE = 0;
-    public static final int MAX_CALORIES_VALUE = 100000;
-    public static final int MAX_CARBOHYDRATE_VALUE = 1000;
-    public static final int MAX_FAT_VALUE = 1000;
+    private static final int MAX_PROTEIN_VALUE = 1000;
+    private static final int MIN_NUTRIENT_VALUE = 0;
+    private static final int MAX_CALORIES_VALUE = 100000;
+    private static final int MAX_CARBOHYDRATE_VALUE = 1000;
+    private static final int MAX_FAT_VALUE = 1000;
 
     @NotNull
     @Max(MAX_PROTEIN_VALUE)
@@ -36,7 +36,7 @@ public class Totals {
     @Min(MIN_NUTRIENT_VALUE)
     private Integer calories;
 
-    public Totals(Integer protein, Integer fat, Integer carbohydrate, Integer calories) {
+    private Totals(Integer protein, Integer fat, Integer carbohydrate, Integer calories) {
         this.protein = protein;
         this.fat = fat;
         this.carbohydrate = carbohydrate;

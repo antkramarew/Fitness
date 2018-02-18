@@ -14,5 +14,5 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
 
     Optional<ProductEntity> findProductById(Long id);
 
-    Page<ProductEntity> findProductByNameStartingWith(String name, Pageable pageable);
+    Page<ProductEntity> findProductByNameStartingWithIgnoreCase(String name, Pageable pageable);
 }

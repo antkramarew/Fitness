@@ -7,17 +7,24 @@ import java.util.function.BiFunction;
  */
 public enum Measure implements BiFunction<Integer, Integer, Integer> {
 
-    COUNT {
+    UNIT(1) {
         @Override
         public Integer apply(Integer productValue, Integer value) {
             return productValue * value;
         }
-    }, WEIGHT {
+    }, WT(100) {
         @Override
         public Integer apply(Integer productValue, Integer lineValue) {
-            return productValue * lineValue / MEASURE_VALUE_IN_GRAMS;
+            return productValue * lineValue / 100;
         }
     };
-    public static final int MEASURE_VALUE_IN_GRAMS = 100;
+    private final int defaultAmount;
 
+    Measure(int defaultAmount) {
+        this.defaultAmount = defaultAmount;
+    }
+
+    public int getDefaultAmount() {
+        return defaultAmount;
+    }
 }

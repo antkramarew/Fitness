@@ -48,9 +48,9 @@ public class ProductBusinessService implements ProductService {
     }
 
     @Override
-    public Page<ProductDTO> getProductByName(String name, Pageable pageable) {
+    public Page<ProductDTO> getProductByName(String nameStartWith, Pageable pageable) {
         Page<ProductEntity> products = this.productRepository
-                .findProductByNameStartingWith(name, pageable);
+                .findProductByNameStartingWithIgnoreCase(nameStartWith, pageable);
         return products.map(productEntity -> mapper.map(productEntity, ProductDTO.class));
     }
 

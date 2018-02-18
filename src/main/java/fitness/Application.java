@@ -1,15 +1,17 @@
 package fitness;
 
-import fitness.domain.dto.types.*;
+import fitness.domain.dto.types.Measure;
 import fitness.persistence.entity.ProductEntity;
 import fitness.persistence.entity.ProductLineEntity;
 import fitness.persistence.repository.ProductLineRepository;
 import fitness.persistence.repository.ProductRepository;
 import fitness.persistence.repository.spring.ExtendedJpaRepository;
 import org.dozer.DozerBeanMapper;
+import org.h2.server.web.WebServlet;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
@@ -37,6 +39,14 @@ public class Application {
         };
     }
 
+    @Bean
+    public ServletRegistrationBean h2servletRegistration() {
+        ServletRegistrationBean registration = new ServletRegistrationBean(new WebServlet());
+        registration.addUrlMappings("/console/*");
+        return registration;
+    }
+
+
     private ProductLineEntity initProductLine(ProductEntity product) {
         ProductLineEntity lineEntity = new ProductLineEntity();
         lineEntity.setProduct(product);
@@ -47,7 +57,7 @@ public class Application {
     private ProductEntity initProduct() {
         ProductEntity product = new ProductEntity();
         product.setName("Test product");
-        product.setMeasure(Measure.WEIGHT);
+        product.setMeasure(Measure.WT);
         product.setCalories(100);
         product.setFat(3);
         product.setProtein(20);

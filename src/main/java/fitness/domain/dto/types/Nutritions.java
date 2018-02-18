@@ -1,17 +1,15 @@
 package fitness.domain.dto.types;
 
 import com.google.common.collect.ForwardingList;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
+import fitness.domain.dto.types.facts.Nutrition;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /**
  * Created by toxa on 7/29/2017.
  */
-public class NutritionItems<T extends Nutrition> extends ForwardingList<T> {
+public class Nutritions<T extends Nutrition> extends ForwardingList<T> {
 
     private List<T> delegate;
 
@@ -21,7 +19,9 @@ public class NutritionItems<T extends Nutrition> extends ForwardingList<T> {
     }
 
     public Totals getTotals() {
-        return delegate.stream().map(T::getTotals).reduce(Totals::sum).orElse(Totals.empty());
+        for (T t : delegate) {
+            t.getTotals().
+        }
     }
 
     public void addItem(T item) {
@@ -30,7 +30,7 @@ public class NutritionItems<T extends Nutrition> extends ForwardingList<T> {
         }
     }
 
-    public NutritionItems (List<T> delegate){
+    public Nutritions(List<T> delegate){
         this.delegate = delegate;
     }
 }

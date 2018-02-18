@@ -6,13 +6,14 @@ import java.util.List;
 /**
  * Created by Anton_Kramarev on 7/20/2017.
  */
-@Entity
+@Entity(name = "meal")
 public class MealEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     @OneToMany
+    @JoinColumn(name = "fk_meal_id")
     private List<ProductLineEntity> lines;
 
     public Long getId() {
